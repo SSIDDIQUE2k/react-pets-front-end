@@ -1,8 +1,10 @@
 // src/App.jsx
+import React from 'react';
 import { useState, useEffect } from 'react';
 import * as petService from './services/petService';
 import PetList from './components/PetList';
 import PetDetail from './components/PetDetail';
+import PetForm from './components/PetForm';
 
 // src/App.jsx
 
@@ -23,6 +25,27 @@ const handleFormView = () => {
 
 
 };
+
+
+//call the sevice
+
+const handleAddPet = async (formData) => {
+  try {
+    const newPet = await petService.create(formData);
+
+    if (newPet.error) {
+      throw new Error(newPet.error);
+    }
+
+    setPetList([newPet, ...petList]);
+    setIsFormOpen(false);
+  } catch (error) {
+    // Log the error to the console
+    console.log(error);
+  }
+};
+
+
 
 
 
@@ -57,6 +80,8 @@ const updateSelected = (pet) => {
 // src/components/petList.jsx
 // src/App.jsx
 
+// src/App.jsx
+
 return (
   <>
     <PetList
@@ -66,13 +91,15 @@ return (
       isFormOpen={isFormOpen}
     />
     {isFormOpen ? (
-      <PetForm />
+      <PetForm handleAddPet={handleAddPet} />
     ) : (
       <PetDetail selected={selected} />
     )}
   </>
 );
-}
+};
+
+
 
 
 export default App;
