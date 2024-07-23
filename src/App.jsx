@@ -9,7 +9,28 @@ import PetDetail from './components/PetDetail';
 const App = () => {
   const [petList, setPetList] = useState([]);
   const [selected, setSelected] = useState(null)
-  // src/App.jsx
+const [isFormOpen, setIsFormOpen] = useState(false);
+
+const handleFormView = () => {
+  setIsFormOpen(!isFormOpen);
+
+<PetList
+  petList={petList}
+  updateSelected={updateSelected}
+  handleFormView={handleFormView}
+/>
+
+
+
+};
+
+
+
+
+
+
+
+
 
 useEffect(() => {
   const fetchPets = async () => {
@@ -29,20 +50,29 @@ useEffect(() => {
   fetchPets();
 }, []);
 
-// src/App.jsx
-
 const updateSelected = (pet) => {
   setSelected(pet);
 };
 
 // src/components/petList.jsx
+// src/App.jsx
 
-return <PetList petList={petList} updateSelected={updateSelected} />;
-<PetDetail selected={selected} />
-
-};
-// READ - GET - /pets
-
+return (
+  <>
+    <PetList
+      petList={petList}
+      updateSelected={updateSelected}
+      handleFormView={handleFormView}
+      isFormOpen={isFormOpen}
+    />
+    {isFormOpen ? (
+      <PetForm />
+    ) : (
+      <PetDetail selected={selected} />
+    )}
+  </>
+);
+}
 
 
 export default App;

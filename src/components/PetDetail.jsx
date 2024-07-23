@@ -21,5 +21,5 @@ const PetDetail = (props) => {
     );
   };
   
-  export default PetDetails;
+  export default PetDetail;
   
