@@ -17,6 +17,10 @@ const PetDetail = (props) => {
         <h2>
           Age: {props.selected.age} year{props.selected.age > 1 ? 's' : ''} old
         </h2>
+        // src/components/PetDetail.jsx
+
+<button onClick={() => props.handleFormView(props.selected)}>Edit</button>
+
       </div>
     );
   };

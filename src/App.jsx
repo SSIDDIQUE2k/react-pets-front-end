@@ -13,18 +13,18 @@ const App = () => {
   const [selected, setSelected] = useState(null)
 const [isFormOpen, setIsFormOpen] = useState(false);
 
-const handleFormView = () => {
+const handleFormView = (pet) => {
+  if (!pet.name) setSelected(null);
   setIsFormOpen(!isFormOpen);
 
-<PetList
+
+  <PetList
   petList={petList}
   updateSelected={updateSelected}
   handleFormView={handleFormView}
 />
-
-
-
 };
+
 
 
 //call the sevice
@@ -43,17 +43,8 @@ const handleAddPet = async (formData) => {
     // Log the error to the console
     console.log(error);
   }
+  
 };
-
-
-
-
-
-
-
-
-
-
 
 useEffect(() => {
   const fetchPets = async () => {
@@ -77,10 +68,7 @@ const updateSelected = (pet) => {
   setSelected(pet);
 };
 
-// src/components/petList.jsx
-// src/App.jsx
 
-// src/App.jsx
 
 return (
   <>
@@ -93,13 +81,10 @@ return (
     {isFormOpen ? (
       <PetForm handleAddPet={handleAddPet} />
     ) : (
-      <PetDetail selected={selected} />
+      <PetDetail selected={selected} handleFormView={handleFormView} />
     )}
   </>
 );
+
 };
-
-
-
-
 export default App;
