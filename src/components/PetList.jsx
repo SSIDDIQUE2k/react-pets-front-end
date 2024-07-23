@@ -1,17 +1,13 @@
 
-
 // src/components/PetList.jsx
-
 const PetList = (props) => {
   const pets = props.petList.map((pet) => (
-    <a key={pet._id} onClick={() => console.log(pet)}>
+    <a key={pet._id} onClick={() => props.updateSelected(pet)}>
     <li>{pet.name}</li>
   </a>
 ));
 
-
 // src/components/petList.jsx
-
 
 return (
   <div>
@@ -21,7 +17,5 @@ return (
 );
 
 };
-
-
 
 export default PetList;
