@@ -4,6 +4,12 @@ import { useState, useEffect } from 'react';
 
 import * as petService from './services/petService';
 
+
+import PetList from './components/PetList';
+
+
+
+
 // src/App.jsx
 
 const App = () => {
@@ -29,8 +35,12 @@ useEffect(() => {
   fetchPets();
 }, []);
 
+// src/components/petList.jsx
 
-  return <h1>Hello world!</h1>;
+return <PetList petList={petList} />;
+
+
+
 };
 // READ - GET - /pets
 
