@@ -17,16 +17,20 @@ const PetForm = (props) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
-const handleSubmitForm = (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.handleAddPet(formData);
-    // remove: setFormData({ name: '', age: '', breed: '' })
+    if (props.selected) {
+      // Don't forget to pass both formData and the ._id!
+      props.handleUpdatePet(formData, props.selected._id);
+    } else {
+      props.handleAddPet(formData);
+    }
   };
   
 
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="name"> Name </label>
         <input
           id="name"
